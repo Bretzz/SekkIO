@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bucket Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    .box {
+      background: #fff;
+      padding: 30px;
+      margin: 20px auto;
+      width: 350px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    input[type="text"], input[type="file"] {
+      margin: 10px 0;
+      padding: 8px;
+      width: 90%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+	<div style="display: flex;">
+		<div id="sidebar" style="width: 200px; background: #eee; padding: 10px; height: 100vh; overflow-y: auto;">
+			<h3>Buckets</h3>
+			<ul id="bucketList"></ul>
+		</div>
+		<div id="main" style="flex: 1; padding: 20px;">
+
+      <div class="box">
+        <h2>Create a New Bucket</h2>
+        <form id="createBucketForm">
+          <input type="text" id="bucketName" name="bucketName" placeholder="Enter bucket name" required>
+          <button type="submit">Create Bucket</button>
+        </form>
+      </div>
+
+      <div class="box">
+        <h2>Upload a File to a Bucket</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <input type="text" id="uploadBucketName" name="uploadBucketName" placeholder="Enter bucket name" required><br>
+          <input type="file" name="file" required><br>
+          <button type="submit">Upload File</button>
+        </form>
+      </div>
+    </div>
+	</div>
+
+  <script>
+    // Handle bucket creation
+    document.getElementById('createBucketForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const bucketName = document.getElementById('bucketName').value.trim();
+      if (!bucketName) return;
+
+      fetch(`/${bucketName}`, {
+        method: 'POST'
+      }).then(response => {
+        if (response.ok) {
+          alert(`Bucket '${bucketName}' created successfully.`);
+        } else {
+          alert(`Error creating bucket: ${response.status}`);
+        }
+      }).catch(error => {
+        alert(`Network error: ${error}`);
+      });
+    });
+
+    // Handle file upload
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const bucketName = document.getElementById('uploadBucketName').value.trim();
+      const formData = new FormData(this);
+
+      if (!bucketName) return;
+
+      fetch(`/${bucketName}`, {
+        method: 'POST',
+        body: formData
+      }).then(response => {
+        if (response.ok) {
+          alert(`File uploaded to bucket '${bucketName}' successfully.`);
+        } else {
+          alert(`Upload failed: ${response.status}`);
+        }
+      }).catch(error => {
+        alert(`Network error: ${error}`);
+      });
+    });
+
+    function fetchBuckets() {
+    fetch('/?bucket=all')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('bucketList');
+        list.innerHTML = ''; // Clear existing
+
+        for (const bucket in data) {
+          const li = document.createElement('li');
+          li.textContent = bucket;
+
+          const fileList = document.createElement('ul');
+          data[bucket].forEach(file => {
+            const fileItem = document.createElement('li');
+            fileItem.textContent = file;
+            fileList.appendChild(fileItem);
+          });
+
+          li.appendChild(fileList);
+          list.appendChild(li);
+        }
+      })
+      .catch(err => {
+        console.error('Failed to fetch buckets:', err);
+      });
+  }
+
+  // Call it on page load
+  window.onload = fetchBuckets;
+  </script>
+
+</body>
+</html>

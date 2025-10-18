@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload an Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    .upload-box {
+      background: #fff;
+      padding: 30px;
+      margin: auto;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    input[type="file"] {
+      margin: 15px 0;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-box">
+    <h1>Upload an Image</h1>
+    <p>Please select an image to upload to this server.</p>
+    <form action="/bucket1" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" required><br>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</body>
+</html>

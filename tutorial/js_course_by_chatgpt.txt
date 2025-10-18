@@ -1,0 +1,50 @@
+1. Functions & Scope
+	Function declarations vs function expressions vs arrow functions
+	How scope works: global, function, block scope (var vs let/const)
+	Closures: functions that remember the environment in which they were created (super important!)
+	Higher-order functions: functions that take other functions as arguments or return functions
+
+2. Objects & Arrays Deep Dive
+	Manipulating objects and arrays (add, remove, update items)
+	Common array methods: .map(), .filter(), .reduce(), .forEach(), .find()
+	Object destructuring and rest/spread syntax (...)
+	Understanding prototypes and inheritance basics
+
+3. Event Loop & Concurrency Model
+	Understand the JavaScript event loop: how async callbacks and promises are handled behind the scenes
+	Difference between call stack, task queue, and microtask queue
+	How this affects performance and UI responsiveness
+
+4. Error Handling
+	Throwing errors manually (throw new Error())
+	Using try/catch effectively
+	Best practices to avoid silent failures
+
+5. Modules
+	How to split code into modules
+	ES6 module syntax: import and export
+	Why modules help organize and maintain large codebases
+
+6. JavaScript Best Practices
+	Writing clean, readable code (naming conventions, comments)
+	Avoiding common pitfalls (like mutating objects, global variables)
+	Using strict mode ("use strict";)
+	Tools: linters like ESLint
+
+7. Basic Browser APIs
+	Besides DOM, knowing about:
+		LocalStorage / SessionStorage (saving data in the browser)
+		Fetch API (for HTTP requests)
+		Event Listeners
+		Timers (setTimeout, setInterval)
+		Console API (debugging)
+
+8. Debugging
+	Using browser DevTools effectively:
+		Breakpoints
+		Inspect variables
+		Step through code
+
+Bonus: Understanding JavaScript Engine Optimizations
+	How engines like V8 optimize your code
+	Why some patterns are faster/slower (helpful later for performance tuning)
