@@ -1,0 +1,8 @@
+This is C++ Application.
+By default listens to the 33120 port for a Bring-Me-Some-Whater (BMSW) Request.
+The Program takes 1 argument, the directory where to whrite data.
+It must be a subdirectory of the root, and no relative paths.
+default 'data/buckets'.
+
+What's a BMSW request?
+
