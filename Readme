@@ -1,4 +1,2 @@
-Just a Nodejs server that creates files with POST and gets files with get.
-No folder hieracy except for the 'bucket' folder.
-
-Also query for searching (#todo)
+SekkIO is a 2 module service.
+A C++ Bucket database with metadata and a JavaScript HTTP RESTful API to access it.
